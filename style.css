@@ -515,6 +515,7 @@ transition: bottom 0.25s ease-Out;
 .sea_sky {
 height: 5%;
 background: #c5e0fd;
+padding-top: 50px;
 }
 
 .sea_sky_visible{
