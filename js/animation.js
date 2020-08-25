@@ -1,3 +1,7 @@
+"use strict";
+
+import { Bouy } from "./bouy.js";
+
 var timer = 0;
 var introDuration = 6000;
 var bobbleCount = 0;
@@ -20,18 +24,29 @@ var shipArray = [];
 var clonedElement = [];
 var cloudIntervalActive = 0;
 var shipWaveIntervalActive = 0;
-var bobbleMoveIntervatActive = 0;
+var bobbleMoveIntervalActive = 0;
+var screenW, screenH, startScreenW, startScreenH;
+var intro;
+var flash_text;
+var web_text;
+var print_text;
+var animationInterval;
+var scrollInterval;
+var cloudInterval;
+var shipWaveInterval;
+var bobbleMoveInterval;
+
 
 
 function init(){
-		var preloader = document.getElementsByClassName("preloader")[0];
-preloader.classList.add("preloader_disapear");
-getScreenSize();
-setFieldSizes();
-prepareTexts();
-createStars(starCount);
-setTimeout(function(){deleteStars(starCount)}, introDuration);
-setTimeout(dalayedAssign, introDuration);
+	var preloader = document.getElementsByClassName("preloader")[0];
+	preloader.classList.add("preloader_disapear");
+	getScreenSize();
+	setFieldSizes();
+	prepareTexts();
+	createStars(starCount);
+	setTimeout(function(){deleteStars(starCount)}, introDuration);
+	setTimeout(dalayedAssign, introDuration);
 }
 
 function getScreenSize(){
@@ -42,6 +57,9 @@ screenW = window.innerWidth
 screenH = window.igetScreenSizennerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
+
+startScreenW =screenW;
+startScreenH =screenH;
 }
 
 function setFieldSizes(){
@@ -67,13 +85,13 @@ getScreenSize();
 setFieldSizes();
 //rePositionClouds();
 //rePositionBobbles();
-//rePositionShips()
+//rePositionShips();
 	
 }
 
 function createStars(count){
 var element = document.getElementById("sky");
-for (i=1; i<=count; i++){
+for (var i=1; i<=count; i++){
 var iTag = document.createElement("I");
 var text = document.createTextNode("star");
 iTag.appendChild(text); 
@@ -95,7 +113,7 @@ shineInterval = setInterval(function(){shine(count);}, 200);
 
 function shine(count){
 	var element = document.getElementById("sky");
-	for (i=0; i<count; i++){
+	for (var i=0; i<count; i++){
 element.getElementsByTagName("I")[i].style.opacity =Math.random()*0.5+0.5;
 }
 }
@@ -104,7 +122,7 @@ function deleteStars(count){
 	clearInterval(shineInterval);
 var parent = document.getElementById("sky");
 var elementArray = parent.getElementsByTagName("I");
-for (i=count-1; i>=0; i--){
+for (var i=count-1; i>=0; i--){
 	var element = elementArray[i];
 parent.removeChild(element);
 addScrollEvent();
@@ -135,7 +153,7 @@ var element= document.getElementById("clouds_middle");
 element.classList.add("linear");
 var element= document.getElementById("clouds_low");
 element.classList.add("linear");
-timerInterval = setInterval(startTimer, 20);
+var timerInterval = setInterval(startTimer, 20);
 positionClouds();
 var player_field = document.getElementsByClassName("flash_field")[0];
 	player_field.activated = 0;
@@ -212,7 +230,9 @@ bobbleOffset = document.getElementById("underwater").offsetTop;
 }
 
 function getWaterOffset(){
-waterOffset = document.getElementsByClassName("sea_water")[0].offsetTop;
+	var  wOffset;
+wOffset = document.getElementsByClassName("sea_water")[0].offsetTop;
+return wOffset;
 }
 
 function positionFlashPlayer(){
@@ -224,7 +244,9 @@ function positionClouds(){
 	getHorizonOffset();
 	cloudArray = document.getElementsByClassName("flash_cloud");
 	cloudCount= cloudArray.length;
-for (i=0; i<cloudCount; i++) {
+	//var cloudPositions = getEvenDistribution(cloudCount);
+for (var i=0; i<cloudCount; i++) {
+	//var oneCloudPos = cloudPositions[i];
 var cloudHeight = cloudArray[i].offsetHeight;
 var cloudWidth = cloudArray[i].offsetWidth;
 cloudArray[i].originalHeight = cloudHeight;
@@ -250,7 +272,7 @@ function rePositionClouds(){
 	getHorizonOffset();
 	cloudArray = document.getElementsByClassName("flash_cloud");
 	cloudCount= cloudArray.length;
-for (i=0; i<cloudCount; i++) {
+for (var i=0; i<cloudCount; i++) {
 var cloudHeight = cloudArray[i].originalHeight;
 var cloudWidth = cloudArray[i].originalWidth;
 cloudArray[i].zDepth = Math.random()*2+1;
@@ -273,7 +295,7 @@ function createBobbles(){
 	getBobbleOffset();
 	clonedElement = document.getElementsByClassName("bobble");
 	bobbleCount= clonedElement.length;
-for (i=0; i<bobbleCount; i++) {
+for (var i=0; i<bobbleCount; i++) {
 //var clonedElementHeight = clonedElement[i].offsetHeight;
 //var clonedElementWidth = clonedElement[i].offsetWidth;
 var clonedElementHeight = 100;
@@ -302,7 +324,7 @@ function rePositionBobbles(){
 	getBobbleOffset();
 	clonedElement = document.getElementsByClassName("bobble");
 	bobbleCount= clonedElement.length;
-for (i=0; i<bobbleCount; i++) {
+for (var i=0; i<bobbleCount; i++) {
 var clonedElementHeight = 100;
 var clonedElementWidth = 100;
 clonedElement[i].zDepth = Math.random()*0.5+0.5;
@@ -324,7 +346,7 @@ clonedElement[i].style.zIndex = Math.round(clonedElement[i].zDepth*100);
 
 function cloneBobble(){
 	getBobbleOffset();
-for (i=1; i<bobbleCount; i++) {
+for (var i=1; i<bobbleCount; i++) {
 clonedElement = document.getElementsByClassName("bobble");
 var clonedElementHeight = clonedElement[0].offsetHeight;
 var clonedElementWidth = clonedElement[0].offsetWidth;
@@ -365,7 +387,7 @@ element.getElementsByTagName("DIV")[1].classList.add("bobble_glow");
 function deleteBobbles(){
 var parent = document.getElementById("underwater");
 var elementArray = parent.getElementsByClassName("bobble");
-for (i=bobbleCount-1; i>=0; i--){
+for (var i=bobbleCount-1; i>=0; i--){
 	var element = elementArray[i];
 parent.removeChild(element);
 }
@@ -374,24 +396,45 @@ bobblesCloned=0;
 clearInterval(movement);
 }
 
+function deleteShipPics(){
+	var picArray =  document.getElementsByClassName("bouy_pic");
+	var picCount = picArray.length;
+	for (var i = picCount-1; i>= 0; i--){
+		picArray[i].remove();	
+	}
+}
+function addVectorShips(){
+	var bouyArray =  document.getElementsByClassName("bouy");
+	var bouyCount = bouyArray.length;
+	for (var i = 0; i< bouyCount; i++){
+		var bouy = new Bouy(bouyArray[i]);
+		bouy.wave();	
+	} 
+}
+
 function positionShips(){
-	getWaterOffset();
+	var onePoint = [];
+	deleteShipPics();
+	addVectorShips(); 
+	var waterOffset = getWaterOffset();
 	var waterHeight = document.getElementsByClassName("sea_water")[0].offsetHeight;
 	shipArray = document.getElementsByClassName("ship");
 	shipCount= shipArray.length;
-for (i=0; i<shipCount; i++) {
+	var points = getEvenDistribution(shipCount);
+for (var i=0; i<shipCount; i++) {
+		onePoint = points[i];
 var shipHeight = shipArray[i].offsetHeight;
 var shipWidth = shipArray[i].offsetWidth;
 shipArray[i].originalHeight = shipHeight;
 shipArray[i].originalWidth = shipWidth;
-shipArray[i].zDepth = Math.random()*0.8+0.2;
+shipArray[i].zDepth = (onePoint[1]*0.7+0.3);
 shipArray[i].startAngle = Math.random()*Math.PI*2;
 shipArray[i].hoveredElement = 0;
 shipArray[i].activeElement = 0;
-shipArray[i].initHeight = Math.round(shipHeight*shipArray[i].zDepth); 
-shipArray[i].initWidth = Math.round(shipWidth*shipArray[i].zDepth);
+shipArray[i].initHeight = 1.3*Math.round(shipHeight*shipArray[i].zDepth); 
+shipArray[i].initWidth = 1.3*Math.round(shipWidth*shipArray[i].zDepth);
 shipArray[i].initY = shipArray[i].zDepth*waterHeight*1.4-shipArray[i].initHeight - 0.2*waterHeight;
-shipArray[i].initX = Math.random()*(screenW-2*shipArray[i].offsetWidth);
+shipArray[i].initX = onePoint[0]*(screenW-shipArray[i].offsetWidth) + shipArray[i].offsetWidth;
 shipArray[i].k = i;
 shipArray[i].style.height = shipArray[i].initHeight+ "px";
 shipArray[i].style.width = shipArray[i].initWidth+ "px";
@@ -402,29 +445,114 @@ shipArray[i].style.zIndex = Math.round(shipArray[i].zDepth*100);
 shipAddMouseEvents();
 }
 
+function getEvenDistribution(pointCount){
+	var tempPoints = new Array (pointCount);
+	var horCount, vertCount, horLength, vertLength;
+	var randomOrder = [];
+	var horRow = [];
+	var vertRow = [];
+	var pointNr, x, y, k, orderNumber;
+	
+	vertCount = Math.floor(Math.sqrt(pointCount));
+	horCount = Math.ceil(pointCount/vertCount);
+	vertLength = 1/vertCount;
+	horLength = 1/horCount;
+	randomOrder = getRandomOrder(pointCount);
+	for (var j = 0; j <vertCount; j++){
+		
+		for (var i = 0; i <horCount; i++){
+			pointNr = j*(horCount-1) + i
+			
+			if (pointNr < pointCount) {
+				var onePoint = new Array(2);
+				k = getRandomSign();
+				x = horLength*(i+ k*Math.random()/2);
+				if(x<0) {x=0};
+				if(x>1) {x=1};
+				
+				k = getRandomSign();
+				y = vertLength*(j+ k*Math.random()/2);
+				if(y<0) {y=0};
+				if(y>1) {y=1};
+				
+				onePoint[0] = x;
+				onePoint[1] = y;
+				orderNumber = randomOrder[pointNr];
+				tempPoints[orderNumber] = onePoint;
+				
+			}
+		}
+		
+	}
+	return tempPoints;
+}
+
+function getRandomSign(){
+	var sign, value;
+	value = Math.random();
+	if (value >0.49 ) {
+		sign = 1;
+	} else {
+		sign = -1;
+	}
+	return sign;
+}
+
+function getRandomOrder(count){
+	var i;
+	var j = count;
+	var tempArr = [];
+	var finalArr = [];
+	var tempCount = count;
+	var tempValue;
+	
+	for (i = 0; i <tempCount; i++){
+			tempArr.push(i);
+		}
+		
+	while (j > 0){
+		tempValue = Math.round((tempArr.length-1)*Math.random());
+		finalArr.push(tempArr[tempValue]);
+		tempArr.splice(tempValue, 1);
+		j = tempArr.length;
+	}
+	return finalArr;
+}
+
 function rePositionShips(){
-	getWaterOffset();
+	var waterOffset = getWaterOffset();
 	var waterHeight = document.getElementsByClassName("sea_water")[0].offsetHeight;
 	shipArray = document.getElementsByClassName("ship");
 	shipCount= shipArray.length;
-for (i=0; i<shipCount; i++) {
-var shipHeight = shipArray[i].originalHeight;
-var shipWidth = shipArray[i].originalWidth ;
-shipArray[i].zDepth = Math.random()*0.8+0.2;
-shipArray[i].startAngle = Math.random()*Math.PI*2;
-shipArray[i].hoveredElement = 0;
-shipArray[i].activeElement = 0;
-shipArray[i].initHeight = Math.round(shipHeight*shipArray[i].zDepth); 
-shipArray[i].initWidth = Math.round(shipWidth*shipArray[i].zDepth);
-shipArray[i].initY = shipArray[i].zDepth*waterHeight*1.4-shipArray[i].initHeight - 0.2*waterHeight;
-shipArray[i].initX = Math.random()*(screenW-2*shipArray[i].offsetWidth);
-shipArray[i].k = i;
-shipArray[i].style.height = shipArray[i].initHeight+ "px";
-shipArray[i].style.width = shipArray[i].initWidth+ "px";
-shipArray[i].style.top = waterOffset + shipArray[i].initY + "px";
-shipArray[i].style.left = shipArray[i].initX+shipArray[i].offsetWidth+ "px";
-shipArray[i].style.zIndex = Math.round(shipArray[i].zDepth*100);
-}
+	var oldScreenWidth = screenWidth;
+	var oldScreenHeight = screenHeight;
+	for (var i=0; i<shipCount; i++) {
+		
+		var oldInitHeight, oldInitWidth, oldInitY, oldInitX;
+		
+		//var shipHeight = shipArray[i].originalHeight;
+		//var shipWidth = shipArray[i].originalWidth ;
+		oldInitHeight = shipArray[i].initHeight;
+		oldInitWidth =	shipArray[i].initWidth;
+		oldInitY = shipArray[i].initY;
+		oldInitX = shipArray[i].initX;
+		
+		shipArray[i].initHeight = 0; 
+		shipArray[i].initWidth = 0;
+		shipArray[i].initY = 0;
+		shipArray[i].initX = oldInitX;
+
+		/* shipArray[i].initHeight = Math.round(shipHeight*shipArray[i].zDepth); 
+		shipArray[i].initWidth = Math.round(shipWidth*shipArray[i].zDepth);
+		shipArray[i].initY = shipArray[i].zDepth*waterHeight*1.4-shipArray[i].initHeight - 0.2*waterHeight;
+		shipArray[i].initX = Math.random()*(screenW-2*shipArray[i].offsetWidth); */
+
+		shipArray[i].style.height = shipArray[i].initHeight+ "px";
+		shipArray[i].style.width = shipArray[i].initWidth+ "px";
+		shipArray[i].style.top = waterOffset + shipArray[i].initY + "px";
+		shipArray[i].style.left = shipArray[i].initX+shipArray[i].offsetWidth+ "px";
+
+	}
 }
 
 function scaleWater(speed, startH){
@@ -432,30 +560,37 @@ var scaleY =Math.round((documentOffsetY-seaScaleStartY)*speed/screenH+startH);
 document.getElementsByClassName("sea_sky")[0].style.height=scaleY+"%";		
 document.getElementsByClassName("sea_water")[0].style.height=100-scaleY+"%";
 var waterNewOffset = document.getElementsByClassName("sea_water")[0].offsetTop;
-for (i=0; i<shipCount; i++) {
+for (var i=0; i<shipCount; i++) {
 shipArray[i].currentY = waterNewOffset+shipArray[i].initY*(100-scaleY)/100-shipArray[i].initHeight;	
 shipArray[i].style.top = shipArray[i].currentY+ "px";
 }
 }
 
 function shipWave(){
-	for (i=0; i<shipCount; i++){
+	for (var i=0; i<shipCount; i++){
 		if (shipArray[i].hoveredElement==0){
-//var currentY = shipArray[i].offsetTop;
-var marginY=3*screenH/768*shipArray[i].zDepth*Math.sin(3/180*Math.PI*timer+shipArray[i].startAngle);
-var rotateY=3*screenH/768*Math.sin(1.5/180*Math.PI*timer+shipArray[i].startAngle);
-//shipArray[i].style.marginTop = marginY +"px";
-shipArray[i].style.transform = "rotate("+rotateY+"deg)";
-shipArray[i].style.mozTransform = "rotate("+rotateY+"deg)";
-shipArray[i].style.webkitTransform = "rotate("+rotateY+"deg)";
-shipArray[i].style.msTransform = "rotate("+rotateY+"deg)";
-shipArray[i].style.oTransform = "rotate("+rotateY+"deg)";
-}
-}
+			//var currentY = shipArray[i].offsetTop;
+			var marginY=3*screenH/768*shipArray[i].zDepth*Math.sin(3/180*Math.PI*timer+shipArray[i].startAngle);
+			var rotateY=3*screenH/768*Math.sin(1.5/180*Math.PI*timer+shipArray[i].startAngle);
+			var matrixSkew = rotateY/72;
+			var matrixTranslateY = Math.abs(2*screenH/768*shipArray[i].zDepth*Math.sin(1.5/180*Math.PI*timer+shipArray[i].startAngle+1.5/360*Math.PI));
+			//shipArray[i].style.marginTop = marginY +"px";
+			/*shipArray[i].style.transform = "rotate("+rotateY+"deg)";
+			shipArray[i].style.mozTransform = "rotate("+rotateY+"deg)";
+			shipArray[i].style.webkitTransform = "rotate("+rotateY+"deg)";
+			shipArray[i].style.msTransform = "rotate("+rotateY+"deg)";
+			shipArray[i].style.oTransform = "rotate("+rotateY+"deg)"; */ 
+			shipArray[i].style.transform = "matrix(1, "+matrixSkew+", "+-matrixSkew+", 1, 0, "+matrixTranslateY+")";
+			shipArray[i].style.mozTransform = "matrix(1, 0, 0, 1, 0, +10*rotateY)";
+			shipArray[i].style.webkitTransform = "matrix(1, 0, 0, 1, 0, +10*rotateY)";
+			shipArray[i].style.msTransform = "matrix(1, 0, 0, 1, 0, +10*rotateY)";
+			shipArray[i].style.oTransform = "matrix(1, 0, 0, 1, 0, +10*rotateY)"; 
+		}
+	}
 }
 
 function cloudAddMouseEvents() {
-for (i=0; i<cloudCount; i++) {
+for (var i=0; i<cloudCount; i++) {
 var elementFromArray = document.getElementsByClassName("flash_cloud")[i];
 elementFromArray.addEventListener("mouseover", cloudAddMouseOver);
 elementFromArray.addEventListener("mouseleave", cloudAddMouseLeave);	
@@ -464,7 +599,7 @@ elementFromArray.addEventListener("click", cloudAddMouseClick);
 }
 
 function shipAddMouseEvents() {
-for (i=0; i<shipCount; i++) {
+for (var i=0; i<shipCount; i++) {
 var elementFromArray = document.getElementsByClassName("ship")[i];
 elementFromArray.addEventListener("mouseover", shipAddMouseOver);
 elementFromArray.addEventListener("mouseleave", shipAddMouseLeave);	
@@ -472,7 +607,7 @@ elementFromArray.addEventListener("click", shipAddMouseClick);
 }		
 }
 function addMouseEvents() {
-for (i=0; i<bobbleCount; i++) {
+for (var i=0; i<bobbleCount; i++) {
 var elementFromArray = document.getElementsByClassName("bobble")[i];
 elementFromArray.addEventListener("mouseover", addMouseOver);
 elementFromArray.addEventListener("mouseleave", addMouseLeave);	
@@ -572,15 +707,15 @@ if(shipArray.opened ==1){
 //window.scrollTo(0, tempTargetPosition);
 } 
 
-if (documentOffsetY < BobbleCreationStartY && bobbleMoveIntervatActive ==1){
-	clearInterval(bobbleMoveIntervat);
-		bobbleMoveIntervatActive =0;
+if (documentOffsetY < BobbleCreationStartY && bobbleMoveIntervalActive ==1){
+	clearInterval(bobbleMoveInterval);
+		bobbleMoveIntervalActive =0;
 //deleteBobbles();
 }
 
-if (documentOffsetY >= BobbleCreationStartY && bobbleMoveIntervatActive ==0){
-bobbleMoveIntervat = setInterval(function(){move();}, 20);
-bobbleMoveIntervatActive =1;
+if (documentOffsetY >= BobbleCreationStartY && bobbleMoveIntervalActive ==0){
+bobbleMoveInterval = setInterval(function(){move();}, 20);
+bobbleMoveIntervalActive =1;
 //createBobbles();
 }
 
@@ -816,7 +951,7 @@ close.addEventListener("click", shipCloseWindow);
 }
 
 function shipCloseWindow(){
-	for (i=0; i<shipCount; i++){
+	for (var i=0; i<shipCount; i++){
 	if ( shipArray[i].activeElement == 1){
 		var ship = document.getElementsByClassName("ship")[i];
 	var flag = document.getElementsByClassName("flag")[i];
@@ -898,7 +1033,7 @@ element.getElementsByClassName("bobble_glow")[0].style.display= "";
 }
 
 function deactivateOtherElements(el){
-for (i=0; i<bobbleCount; i++){
+for (var i=0; i<bobbleCount; i++){
 	if (i != el.k){
 var element = document.getElementsByClassName("bobble")[i];
 if (element.activeElement==1){
@@ -921,7 +1056,7 @@ wave(3, 1.5);
 }
 
 function relativeMoveUp(speed){
-	for (i=0; i<bobbleCount; i++){
+	for (var i=0; i<bobbleCount; i++){
 		var element = document.getElementsByClassName("bobble")[i];
 		if (element.hoveredElement==0){
 var currentY = element.offsetTop;
@@ -942,7 +1077,7 @@ document.getElementsByClassName("bobble")[i].style.top = currentY +"px";
 }
 
 function wave(speed, amplitude){
-	for (i=0; i<bobbleCount; i++){
+	for (var i=0; i<bobbleCount; i++){
 		var element = document.getElementsByClassName("bobble")[i];
 		if (element.hoveredElement==0){
 var currentX = element.offsetLeft;
@@ -959,7 +1094,7 @@ document.getElementsByClassName("bobble")[i].style.left = currentX +"px";
 }
 
 function relativeMove(speed){
-	for (i=0; i<cloudCount; i++){
+	for (var i=0; i<cloudCount; i++){
 		var element = document.getElementsByClassName("flash_cloud")[i];
 		if (element.hoveredElement==0){
 var currentX = element.offsetLeft;
@@ -990,7 +1125,7 @@ function splitToCharacters(div){
 div.sourceText = div.innerHTML;
 div.sourceTextLength = div.sourceText.length;
 div.innerHTML="";
-for (i=0; i< div.sourceTextLength; i++){
+for (var i=0; i< div.sourceTextLength; i++){
 var span = document.createElement("span");
 var sourceLetter = div.sourceText.charAt(i);
 var letter = document.createTextNode(sourceLetter);
@@ -1004,7 +1139,7 @@ div.sourceText = div.innerHTML;
 var wordArray = div.sourceText.split(" "); 
 div.sourceTextLength = wordArray.length;
 div.innerHTML="";
-for (i=0; i< div.sourceTextLength; i++){
+for (var i=0; i< div.sourceTextLength; i++){
 var span = document.createElement("span");
 var sourceWord = wordArray[i]+" ";
 var word = document.createTextNode(sourceWord);
@@ -1022,7 +1157,7 @@ div.sourceText = div.innerHTML;
 var wordArray = div.sourceText.split(" "); 
 div.sourceTextWordLength = wordArray.length;
 div.innerHTML="";
-for (i=0; i< div.sourceTextWordLength; i++){
+for (var i=0; i< div.sourceTextWordLength; i++){
 var span = document.createElement("span");
 var sourceWord = wordArray[i]+" ";
 var word = document.createTextNode(sourceWord);
@@ -1031,7 +1166,7 @@ div.appendChild(span);
 }	
 var currentRowOffsetTop = div.getElementsByTagName("span")[0].offsetTop;
 newLineStart[-1] = 0;
-for (i=0; i< div.sourceTextWordLength; i++){
+for (var i=0; i< div.sourceTextWordLength; i++){
 	var wordOffsetTop = div.getElementsByTagName("span")[i].offsetTop;
 	if ( wordOffsetTop > currentRowOffsetTop ){
 		newLineStart[j] = div.sourceText.search(wordArray[i]);
@@ -1044,7 +1179,7 @@ lineArray[j] = div.sourceText.substring(newLineStart[j-1],div.sourceText.length)
 div.sourceTextLength = lineArray.length;
 deleteSpans(div);
 div.innerHTML="";
-for (j=0; j < div.sourceTextLength; j++){
+for (var j=0; j < div.sourceTextLength; j++){
 var span = document.createElement("span");
 var sourceLine = lineArray[j];
 var words = document.createTextNode(sourceLine);
@@ -1057,7 +1192,7 @@ div.appendChild(span);
 function animationFrom(div, direction){
 	div.positioned = 1;
 	var spanArray = div.getElementsByTagName("SPAN");
-	for (i=0; i< div.sourceTextLength; i++){
+	for (var i=0; i< div.sourceTextLength; i++){
 		spanArray[i].direction = direction;
 		spanArray[i].classList.add(direction);
 	}
@@ -1067,7 +1202,7 @@ function animationFrom(div, direction){
 function animationFromSides(div){
 	div.positioned = 1;
 	var spanArray = div.getElementsByTagName("SPAN");
-	for (i=0; i< div.sourceTextLength; i++){
+	for (var i=0; i< div.sourceTextLength; i++){
 		if (i%2 == 0) {
 		spanArray[i].direction = "right";
 		spanArray[i].classList.add("right");
@@ -1097,9 +1232,12 @@ function startAnimation(div){
 }
 
 function deleteSpans(div){
-	for (i=0; i< div.sourceTextLength; i++){
+	for (var i=0; i< div.sourceTextLength; i++){
 	var span = div.getElementsByTagName("span")[0];
 div.removeChild(span);
 	}
 	div.innerHTML = div.sourceText;	
 }
+var body =  document.getElementsByTagName("BODY")[0];
+body.addEventListener("load", init());
+window.addEventListener("resize", resizeWindow);
