@@ -58,8 +58,8 @@ screenH = window.igetScreenSizennerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
 
-startScreenW =screenW;
-startScreenH =screenH;
+//startScreenW =screenW;
+//startScreenH =screenH;
 }
 
 function setFieldSizes(){
