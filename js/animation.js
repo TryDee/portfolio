@@ -85,7 +85,7 @@ getScreenSize();
 setFieldSizes();
 //rePositionClouds();
 //rePositionBobbles();
-rePositionShips();
+//rePositionShips();
 	
 }
 
@@ -537,9 +537,9 @@ function rePositionShips(){
 		oldInitY = shipArray[i].initY;
 		oldInitX = shipArray[i].initX;
 		
-		shipArray[i].initHeight = ; 
-		shipArray[i].initWidth = ;
-		shipArray[i].initY = ;
+		shipArray[i].initHeight = 0; 
+		shipArray[i].initWidth = 0;
+		shipArray[i].initY = 0;
 		shipArray[i].initX = oldInitX;
 
 		/* shipArray[i].initHeight = Math.round(shipHeight*shipArray[i].zDepth); 
