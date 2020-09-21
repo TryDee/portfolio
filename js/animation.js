@@ -58,8 +58,8 @@ screenH = window.igetScreenSizennerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
 
-//startScreenW =screenW;
-//startScreenH =screenH;
+startScreenW =screenW;
+startScreenH =screenH;
 }
 
 function setFieldSizes(){
@@ -85,7 +85,7 @@ getScreenSize();
 setFieldSizes();
 //rePositionClouds();
 //rePositionBobbles();
-//rePositionShips();
+rePositionShips();
 	
 }
 
@@ -537,10 +537,10 @@ function rePositionShips(){
 		oldInitY = shipArray[i].initY;
 		oldInitX = shipArray[i].initX;
 		
-		shipArray[i].initHeight = 0; 
-		shipArray[i].initWidth = 0;
-		shipArray[i].initY = 0;
-		shipArray[i].initX = oldInitX;
+		/* shipArray[i].initHeight = ; 
+		shipArray[i].initWidth = ;
+		shipArray[i].initY = ;
+		shipArray[i].initX = oldInitX; */
 
 		/* shipArray[i].initHeight = Math.round(shipHeight*shipArray[i].zDepth); 
 		shipArray[i].initWidth = Math.round(shipWidth*shipArray[i].zDepth);
