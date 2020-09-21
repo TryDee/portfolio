@@ -434,12 +434,12 @@ shipArray[i].activeElement = 0;
 shipArray[i].initHeight = 1.3*Math.round(shipHeight*shipArray[i].zDepth); 
 shipArray[i].initWidth = 1.3*Math.round(shipWidth*shipArray[i].zDepth);
 shipArray[i].initY = shipArray[i].zDepth*waterHeight*1.4-shipArray[i].initHeight - 0.2*waterHeight;
-shipArray[i].initX = onePoint[0]*(screenW-shipArray[i].offsetWidth) + shipArray[i].offsetWidth;
+shipArray[i].initX = onePoint[0]*(screenW-shipArray[i].initWidth);
 shipArray[i].k = i;
 shipArray[i].style.height = shipArray[i].initHeight+ "px";
 shipArray[i].style.width = shipArray[i].initWidth+ "px";
 shipArray[i].style.top = waterOffset + shipArray[i].initY + "px";
-shipArray[i].style.left = shipArray[i].initX+shipArray[i].offsetWidth+ "px";
+shipArray[i].style.left = shipArray[i].initX+shipArray[i].initWidth/2+ "px";
 shipArray[i].style.zIndex = Math.round(shipArray[i].zDepth*100);
 }
 shipAddMouseEvents();
