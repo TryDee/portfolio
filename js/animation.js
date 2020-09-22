@@ -42,7 +42,9 @@ function init(){
 	var preloader = document.getElementsByClassName("preloader")[0];
 	preloader.classList.add("preloader_disapear");
 	getScreenSize();
-	setFieldSizes();
+	startScreenW =screenW;
+	startScreenH =screenH;
+	setFieldSizesAndClasses();
 	prepareTexts();
 	createStars(starCount);
 	setTimeout(function(){deleteStars(starCount)}, introDuration);
@@ -58,34 +60,43 @@ screenH = window.igetScreenSizennerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
 
-//startScreenW =screenW;
-//startScreenH =screenH;
+}
+
+function setFieldSizesAndClasses(){
+var lmnt= document.getElementById("sky");
+lmnt.style.height= screenH+5+"px";
+lmnt.classList.add("sky_up");
+var lmnt= document.getElementById("clouds_heigh");
+lmnt.classList.add("clouds_heigh_up");
+var lmnt= document.getElementById("clouds_middle");
+lmnt.classList.add("clouds_middle_up");
+var lmnt= document.getElementById("clouds_low");
+lmnt.classList.add("clouds_low_up");
+var lmnt= document.getElementById("horizon");
+lmnt.style.height= screenH+"px";
+var lmnt= document.getElementById("sea");
+lmnt.style.height= screenH+"px";
+var lmnt= document.getElementById("underwater");
+lmnt.style.height= screenH+"px";	
 }
 
 function setFieldSizes(){
-var element= document.getElementById("sky");
-element.style.height= screenH+5+"px";
-element.classList.add("sky_up");
-var element= document.getElementById("clouds_heigh");
-element.classList.add("clouds_heigh_up");
-var element= document.getElementById("clouds_middle");
-element.classList.add("clouds_middle_up");
-var element= document.getElementById("clouds_low");
-element.classList.add("clouds_low_up");
-var element= document.getElementById("horizon");
-element.style.height= screenH+"px";
-var element= document.getElementById("sea");
-element.style.height= screenH+"px";
-var element= document.getElementById("underwater");
-element.style.height= screenH+"px";	
+var lmnt= document.getElementById("sky");
+lmnt.style.height= screenH+5+"px";
+var lmnt= document.getElementById("horizon");
+lmnt.style.height= screenH+"px";
+var lmnt= document.getElementById("sea");
+lmnt.style.height= screenH+"px";
+var lmnt= document.getElementById("underwater");
+lmnt.style.height= screenH+"px";	
 }
 
 function resizeWindow(){
 getScreenSize();
 setFieldSizes();
-//rePositionClouds();
-//rePositionBobbles();
-//rePositionShips();
+rePositionClouds();
+rePositionBobbles();
+rePositionShips();
 	
 }
 
@@ -141,18 +152,21 @@ button3.addEventListener("click", function(){easeScrollTo("underwater")});
 setTimeout(function(){revealButtons(button3)}, 1000);
 setTimeout(function(){reveatNavigator()}, 2000);
 setTimeout(function(){runAnimation(intro, 200)}, 2500);
-var element= document.getElementById("horizon");
-element.classList.remove("hide");
-var element= document.getElementById("sea");
-element.classList.remove("hide");
-var element= document.getElementById("underwater");
-element.classList.remove("hide");
-var element= document.getElementById("clouds_heigh");
-element.classList.add("linear");
-var element= document.getElementById("clouds_middle");
-element.classList.add("linear");
-var element= document.getElementById("clouds_low");
-element.classList.add("linear");
+
+var lmnt= document.getElementById("sky");
+lmnt.classList.remove("trans-6s");
+var lmnt= document.getElementById("horizon");
+lmnt.classList.remove("hide");
+var lmnt= document.getElementById("sea");
+lmnt.classList.remove("hide");
+var lmnt= document.getElementById("underwater");
+lmnt.classList.remove("hide");
+var lmnt= document.getElementById("clouds_heigh");
+lmnt.classList.add("linear");
+var lmnt= document.getElementById("clouds_middle");
+lmnt.classList.add("linear");
+var lmnt= document.getElementById("clouds_low");
+lmnt.classList.add("linear");
 var timerInterval = setInterval(startTimer, 20);
 positionClouds();
 var player_field = document.getElementsByClassName("flash_field")[0];
@@ -272,22 +286,16 @@ function rePositionClouds(){
 	getHorizonOffset();
 	cloudArray = document.getElementsByClassName("flash_cloud");
 	cloudCount= cloudArray.length;
+	var heightRatio = screenH/startScreenH;
 for (var i=0; i<cloudCount; i++) {
-var cloudHeight = cloudArray[i].originalHeight;
-var cloudWidth = cloudArray[i].originalWidth;
-cloudArray[i].zDepth = Math.random()*2+1;
-cloudArray[i].hoveredElement = 0;
-cloudArray[i].activeElement = 0;
-cloudArray[i].initHeight = Math.round(cloudHeight*cloudArray[i].zDepth/3); 
+/* cloudArray[i].initHeight = Math.round(cloudHeight*cloudArray[i].zDepth/3); 
 cloudArray[i].initWidth = Math.round(cloudWidth*cloudArray[i].zDepth/3);
-cloudArray[i].initY = cloudArray[i].zDepth*screenH/3-cloudArray[i].initHeight;
-cloudArray[i].initX = Math.random()*screenW;
-cloudArray[i].k = i;
-cloudArray[i].style.height = cloudArray[i].initHeight+ "px";
-cloudArray[i].style.width = cloudArray[i].initWidth+ "px";
-cloudArray[i].style.top = horizonOffset+cloudArray[i].initY+ "px";
-cloudArray[i].style.left = cloudArray[i].initX + "px";
-cloudArray[i].style.zIndex = Math.round(cloudArray[i].zDepth*33);
+cloudArray[i].style.height = cloudArray[i].initHeight+ "px"; 
+cloudArray[i].style.width = cloudArray[i].initWidth+ "px"; */
+
+cloudArray[i].curentY = cloudArray[i].initY * heightRatio;
+cloudArray[i].style.top = horizonOffset+cloudArray[i].curentY+ "px";
+
 }
 }
 
@@ -324,23 +332,14 @@ function rePositionBobbles(){
 	getBobbleOffset();
 	clonedElement = document.getElementsByClassName("bobble");
 	bobbleCount= clonedElement.length;
+	var widthRatio = screenW/startScreenW;
 for (var i=0; i<bobbleCount; i++) {
-var clonedElementHeight = 100;
-var clonedElementWidth = 100;
-clonedElement[i].zDepth = Math.random()*0.5+0.5;
-clonedElement[i].startAngle = Math.random()*Math.PI*2;
-clonedElement[i].hoveredElement = 0;
-clonedElement[i].activeElement = 0;
-clonedElement[i].initHeight = Math.round(clonedElementHeight*clonedElement[i].zDepth); 
-clonedElement[i].initWidth = Math.round(clonedElementWidth*clonedElement[i].zDepth);
-clonedElement[i].initY = Math.random()*screenH;
-clonedElement[i].initX = Math.random()*screenW-clonedElement[i].offsetWidth;
-clonedElement[i].k = i;
-clonedElement[i].style.height = clonedElement[i].initHeight+ "px";
-clonedElement[i].style.width = clonedElement[i].initWidth+ "px";
-clonedElement[i].style.top = bobbleOffset+clonedElement[i].initY+ "px";
-clonedElement[i].style.left = clonedElement[i].initX+ "px";
-clonedElement[i].style.zIndex = Math.round(clonedElement[i].zDepth*100);
+
+/* clonedElement[i].style.height = clonedElement[i].initHeight+ "px";
+clonedElement[i].style.width = clonedElement[i].initWidth+ "px"; */
+
+var currentX = clonedElement[i].initX;
+clonedElement[i].style.left = currentX*widthRatio+ "px";
 }
 }
 
@@ -434,12 +433,13 @@ shipArray[i].activeElement = 0;
 shipArray[i].initHeight = 1.3*Math.round(shipHeight*shipArray[i].zDepth); 
 shipArray[i].initWidth = 1.3*Math.round(shipWidth*shipArray[i].zDepth);
 shipArray[i].initY = shipArray[i].zDepth*waterHeight*1.4-shipArray[i].initHeight - 0.2*waterHeight;
-shipArray[i].initX = onePoint[0]*(screenW-shipArray[i].offsetWidth) + shipArray[i].offsetWidth;
+shipArray[i].currentY = shipArray[i].initY;
+shipArray[i].initX = onePoint[0]*(screenW-shipArray[i].initWidth)+shipArray[i].initWidth/2;
 shipArray[i].k = i;
 shipArray[i].style.height = shipArray[i].initHeight+ "px";
 shipArray[i].style.width = shipArray[i].initWidth+ "px";
 shipArray[i].style.top = waterOffset + shipArray[i].initY + "px";
-shipArray[i].style.left = shipArray[i].initX+shipArray[i].offsetWidth+ "px";
+shipArray[i].style.left = shipArray[i].initX+"px";
 shipArray[i].style.zIndex = Math.round(shipArray[i].zDepth*100);
 }
 shipAddMouseEvents();
@@ -524,33 +524,14 @@ function rePositionShips(){
 	var waterHeight = document.getElementsByClassName("sea_water")[0].offsetHeight;
 	shipArray = document.getElementsByClassName("ship");
 	shipCount= shipArray.length;
-	var oldScreenWidth = screenWidth;
-	var oldScreenHeight = screenHeight;
+	var widthRatio = screenW/startScreenW;
+	var heightRatio = screenH/startScreenH;
 	for (var i=0; i<shipCount; i++) {
 		
-		var oldInitHeight, oldInitWidth, oldInitY, oldInitX;
-		
-		//var shipHeight = shipArray[i].originalHeight;
-		//var shipWidth = shipArray[i].originalWidth ;
-		oldInitHeight = shipArray[i].initHeight;
-		oldInitWidth =	shipArray[i].initWidth;
-		oldInitY = shipArray[i].initY;
-		oldInitX = shipArray[i].initX;
-		
-		shipArray[i].initHeight = 0; 
-		shipArray[i].initWidth = 0;
-		shipArray[i].initY = 0;
-		shipArray[i].initX = oldInitX;
-
-		/* shipArray[i].initHeight = Math.round(shipHeight*shipArray[i].zDepth); 
-		shipArray[i].initWidth = Math.round(shipWidth*shipArray[i].zDepth);
-		shipArray[i].initY = shipArray[i].zDepth*waterHeight*1.4-shipArray[i].initHeight - 0.2*waterHeight;
-		shipArray[i].initX = Math.random()*(screenW-2*shipArray[i].offsetWidth); */
-
-		shipArray[i].style.height = shipArray[i].initHeight+ "px";
-		shipArray[i].style.width = shipArray[i].initWidth+ "px";
-		shipArray[i].style.top = waterOffset + shipArray[i].initY + "px";
-		shipArray[i].style.left = shipArray[i].initX+shipArray[i].offsetWidth+ "px";
+		/* shipArray[i].style.height = shipArray[i].initHeight+ "px";
+		shipArray[i].style.width = shipArray[i].initWidth+ "px"; */
+		shipArray[i].style.top = waterOffset + shipArray[i].currentY*heightRatio + "px"; 
+		shipArray[i].style.left = shipArray[i].initX*widthRatio+"px";
 
 	}
 }
@@ -560,9 +541,11 @@ var scaleY =Math.round((documentOffsetY-seaScaleStartY)*speed/screenH+startH);
 document.getElementsByClassName("sea_sky")[0].style.height=scaleY+"%";		
 document.getElementsByClassName("sea_water")[0].style.height=100-scaleY+"%";
 var waterNewOffset = document.getElementsByClassName("sea_water")[0].offsetTop;
+getScreenSize();
+	var heightRatio = screenH/startScreenH;
 for (var i=0; i<shipCount; i++) {
-shipArray[i].currentY = waterNewOffset+shipArray[i].initY*(100-scaleY)/100-shipArray[i].initHeight;	
-shipArray[i].style.top = shipArray[i].currentY+ "px";
+shipArray[i].currentY = shipArray[i].initY*(100-scaleY)/100-shipArray[i].initHeight;	
+shipArray[i].style.top = waterNewOffset+shipArray[i].currentY*heightRatio+ "px"; 
 }
 }
 
@@ -1052,7 +1035,7 @@ elementFromArray.currentY = elementFromArray.offsetTop;
 
 function move(){
 relativeMoveUp(0.7);
-wave(3, 1.5);
+wave(3, 1.5); 
 }
 
 function relativeMoveUp(speed){
@@ -1095,14 +1078,14 @@ document.getElementsByClassName("bobble")[i].style.left = currentX +"px";
 
 function relativeMove(speed){
 	for (var i=0; i<cloudCount; i++){
-		var element = document.getElementsByClassName("flash_cloud")[i];
-		if (element.hoveredElement==0){
-var currentX = element.offsetLeft;
-currentX-=speed*screenW/1366*element.zDepth;
-if (currentX < -element.offsetWidth){
-	currentX = screenW+element.offsetWidth;
+		var lmnt = document.getElementsByClassName("flash_cloud")[i];
+		if (lmnt.hoveredElement==0){
+var currentX = lmnt.offsetLeft;
+currentX-=speed*screenW/1366*lmnt.zDepth;
+if (currentX < -lmnt.offsetWidth){
+	currentX = screenW+lmnt.offsetWidth;
 }
-element.style.left = currentX +"px";
+lmnt.style.left = currentX +"px";
 }
 }
 }
