@@ -234,6 +234,15 @@ text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 .sky_up {
 /* border: 1px solid #CCC; */	
 background-position: 0 100%;
+  	/* transition: all 6s ease-in-Out;
+transition: all 6s ease-in-Out;
+-webkit-transition: all 6s ease-in-Out;
+-moz-transition: all 6s ease-in-Out;
+-o-transition: all 6s ease-in-Out; */
+}
+
+.trans-6s {	
+
   	transition: all 6s ease-in-Out;
 transition: all 6s ease-in-Out;
 -webkit-transition: all 6s ease-in-Out;
@@ -253,7 +262,7 @@ transition: all 6s ease-in-Out;
 transition: all 6s ease-in-Out;
 -webkit-transition: all 6s ease-in-Out;
 -moz-transition: all 6s ease-in-Out;
--o-transition: all 6s ease-in-Out;
+-o-transition: all 6s ease-in-Out; 
 }
 
 .clouds_low_uper {
@@ -655,10 +664,10 @@ transition: all .25s ease-Out;
 }
 
 .flag_full img {
-height: 80%;
-width: auto;
+max-width: 80%;
+height: auto;
 margin: auto;
-margin-top: 5%;
+margin-top: 8%; 
 border: 3px solid #FFF;
 }
 
