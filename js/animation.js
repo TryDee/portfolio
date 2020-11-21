@@ -25,7 +25,7 @@ var clonedElement = [];
 var cloudIntervalActive = 0;
 var shipWaveIntervalActive = 0;
 var bobbleMoveIntervalActive = 0;
-var screenW, screenH, startScreenW, startScreenH;
+var screenW, screenH, startScreenW, startScreenH, tempW, tempH, deltaW, deltaH;
 var intro;
 var flash_text;
 var web_text;
@@ -44,6 +44,10 @@ function init(){
 	getScreenSize();
 	startScreenW =screenW;
 	startScreenH =screenH;
+	tempW = screenW
+	tempH = screenH
+	deltaW=  screenW - tempW
+	deltaH=  screenH - tempH
 	setFieldSizesAndClasses();
 	prepareTexts();
 	createStars(starCount);
@@ -93,6 +97,10 @@ lmnt.style.height= screenH+"px";
 
 function resizeWindow(){
 getScreenSize();
+deltaW = screenW -tempW;
+deltaH = screenH -tempH;
+tempW = screenW;
+tempH = screenH;
 setFieldSizes();
 rePositionClouds();
 rePositionBobbles();
@@ -333,13 +341,16 @@ function rePositionBobbles(){
 	clonedElement = document.getElementsByClassName("bobble");
 	bobbleCount= clonedElement.length;
 	var widthRatio = screenW/startScreenW;
+	var heightRatio = screenH/startScreenH;
 for (var i=0; i<bobbleCount; i++) {
 
 /* clonedElement[i].style.height = clonedElement[i].initHeight+ "px";
 clonedElement[i].style.width = clonedElement[i].initWidth+ "px"; */
 
 var currentX = clonedElement[i].initX;
+var currentY = clonedElement[i].offsetTop;
 clonedElement[i].style.left = currentX*widthRatio+ "px";
+clonedElement[i].style.top = currentY+deltaH + "px";
 }
 }
 
@@ -461,8 +472,7 @@ function getEvenDistribution(pointCount){
 	for (var j = 0; j <vertCount; j++){
 		
 		for (var i = 0; i <horCount; i++){
-			pointNr = j*(horCount-1) + i
-			
+			pointNr = j*(horCount) + i
 			if (pointNr < pointCount) {
 				var onePoint = new Array(2);
 				k = getRandomSign();
@@ -477,6 +487,7 @@ function getEvenDistribution(pointCount){
 				
 				onePoint[0] = x;
 				onePoint[1] = y;
+
 				orderNumber = randomOrder[pointNr];
 				tempPoints[orderNumber] = onePoint;
 				
@@ -485,6 +496,7 @@ function getEvenDistribution(pointCount){
 		
 	}
 	return tempPoints;
+
 }
 
 function getRandomSign(){
@@ -505,7 +517,6 @@ function getRandomOrder(count){
 	var finalArr = [];
 	var tempCount = count;
 	var tempValue;
-	
 	for (i = 0; i <tempCount; i++){
 			tempArr.push(i);
 		}
@@ -901,36 +912,37 @@ function shipClickSet(el){
 	shipArray.opened = 1;
 	shipArray.positionTaken =0;
 	var flag = document.getElementsByClassName("flag")[el.k];
-var shtok = document.getElementsByClassName("shtok")[el.k];
-var bouy = document.getElementsByClassName("bouy")[el.k];
-var bouy_reflect = document.getElementsByClassName("bouy_reflect")[el.k];
-if (flag.getElementsByClassName("flag_up")[0] !== null) {
-flag.classList.remove("flag_up");
-}
-if (shtok.getElementsByClassName("shtok_up")[0] !== null) {
-shtok.classList.remove("shtok_up");
-}
-clearInterval(shipWaveInterval);
-ship.style.height="";
-ship.style.width="";
-ship.style.top="";
-ship.style.left="";
-ship.style.transform = "";
-ship.style.mozTransform = "";
-ship.style.webkitTransform = "";
-ship.style.msTransform = "";
-ship.style.oTransform = "";
-ship.style.zIndex="";
-ship.classList.add("ship_full");
-flag.classList.add("flag_full");
-shtok.classList.add("bouy_hide");
-bouy.classList.add("bouy_hide");
-bouy_reflect.classList.add("bouy_hide");
-var close = document.getElementsByClassName("close")[0];
-close.classList.remove("close_hidden");
-close.addEventListener("click", shipCloseWindow);
-	el.activeElement = 1;
-	el.hoveredElement = 1;
+	var shtok = document.getElementsByClassName("shtok")[el.k];
+	var bouy = document.getElementsByClassName("bouy")[el.k];
+	var bouy_reflect = document.getElementsByClassName("bouy_reflect")[el.k];
+	if (flag.getElementsByClassName("flag_up")[0] !== null) {
+		flag.classList.remove("flag_up");
+	}
+	if (shtok.getElementsByClassName("shtok_up")[0] !== null) {
+		shtok.classList.remove("shtok_up");
+	}
+	clearInterval(shipWaveInterval);
+	ship.style.height="";
+	ship.style.width="";
+	el.top= ship.offsetTop;
+	ship.style.top="";
+	ship.style.left="";
+	ship.style.transform = "";
+	ship.style.mozTransform = "";
+	ship.style.webkitTransform = "";
+	ship.style.msTransform = "";
+	ship.style.oTransform = "";
+	ship.style.zIndex="";
+	ship.classList.add("ship_full");
+	flag.classList.add("flag_full");
+	shtok.classList.add("bouy_hide");
+	bouy.classList.add("bouy_hide");
+	bouy_reflect.classList.add("bouy_hide");
+	var close = document.getElementsByClassName("close")[0];
+	close.classList.remove("close_hidden");
+	close.addEventListener("click", shipCloseWindow);
+		el.activeElement = 1;
+		el.hoveredElement = 1;
 }
 
 function shipCloseWindow(){
@@ -954,6 +966,7 @@ close.removeEventListener("click", shipCloseWindow);
 	ship.style.height = ship.initHeight+ "px";
 ship.style.width = ship.initWidth+ "px";
 ship.style.top = ship.currentY + "px";	
+ship.style.top = ship.top+ "px";	
 ship.style.left = ship.initX+shipArray[i].offsetWidth+ "px";
 ship.style.zIndex = Math.round(ship.zDepth*100);
 	}
