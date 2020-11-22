@@ -841,7 +841,7 @@ function replaceFlash(el) {
 		case 4: lnk = "web/banner_video/228344.mp4"; el.w = 700; el.h= 100; break;
 		case 5: lnk = "web/banner_video/M4_800x90_Times_RU.mp4"; el.w = 800; el.h= 90; break;
 		case 6: lnk = "web/banner_video/Maxima_divas_nedelas_995x95_lv.mp4"; el.w = 995; el.h= 95; break;
-		case 7: lnk = "web/banner_video/Monald_Metals_728x90"; el.w = 728; el.h= 90; break;
+		case 7: lnk = "web/banner_video/Monald_Metals_728x90.mp4"; el.w = 728; el.h= 90; break;
 		case 8: lnk = "web/banner_video/Multikino_750x100_august_LV.mp4"; el.w = 750; el.h= 100; break;
 		case 9: lnk = "web/banner_video/NorvikBanka_20Y_750x180_LV5.mp4"; el.w = 750; el.h= 180; break;
 		case 10: lnk = "web/banner_video/NorvikBanka_Depozit_NY2014_750x180_LV2.mp4"; el.w = 750; el.h= 180; break;
