@@ -841,7 +841,7 @@ function replaceFlash(el) {
 		case 4: lnk = "web/banner_video/228344.mp4"; el.w = 700; el.h= 100; break;
 		case 5: lnk = "web/banner_video/M4_800x90_Times_RU.mp4"; el.w = 800; el.h= 90; break;
 		case 6: lnk = "web/banner_video/Maxima_divas_nedelas_995x95_lv.mp4"; el.w = 995; el.h= 95; break;
-		case 7: lnk = "web/banner_video/Monald_728x90.mp4"; el.w = 728; el.h= 90; break;
+		case 7: lnk = "web/banner_video/NorvikBanka_PensijuAkcija_230x230_LV.mp4"; el.w = 230; el.h= 230; break;
 		case 8: lnk = "web/banner_video/Multikino_750x100_august_LV.mp4"; el.w = 750; el.h= 100; break;
 		case 9: lnk = "web/banner_video/NorvikBanka_20Y_750x180_LV5.mp4"; el.w = 750; el.h= 180; break;
 		case 10: lnk = "web/banner_video/NorvikBanka_Depozit_NY2014_750x180_LV2.mp4"; el.w = 750; el.h= 180; break;
@@ -852,7 +852,10 @@ function replaceFlash(el) {
 		case 15: lnk = "web/banner_video/NorvikBanka_Depozit_Jubilej_750x180_LV3.mp4"; el.w = 750; el.h= 180; break;
 		case 16: lnk = "web/banner_video/NorvikBanka_Depozit_Lieldena_750x180_LV.mp4"; el.w = 750; el.h= 180; break;
 		case 17: lnk = "web/banner_video/NorvikTrade_electronic_trade_250x250_RU3.mp4"; el.w = 250; el.h= 250; break;
-		
+		case 18: lnk = "web/banner_video/Multikino_300x250_atlaides50.mp4"; el.w = 300; el.h= 250; break;
+		case 19: lnk = "web/banner_video/Monald_728x90.mp4"; el.w = 728; el.h= 90; break;	
+		case 20: lnk = "web/banner_video/Balva_banner_KASKO_705x100_06072011R-RU2.mp4"; el.w = 705; el.h= 100; break;	
+		case 21: lnk = "web/banner_video/OT_200x200_RU.mp4"; el.w = 200; el.h= 200; break;		
 	}
 	var player_field = document.getElementsByClassName("flash_field")[0];
 	var player = document.getElementById("flash_player");
@@ -913,6 +916,8 @@ function shipClickSet(el){
 	shipArray.opened = 1;
 	shipArray.positionTaken =0;
 	var flag = document.getElementsByClassName("flag")[el.k];
+	var txt =flag.innerHTML;
+	var pos = txt.indexOf("href=");
 	var shtok = document.getElementsByClassName("shtok")[el.k];
 	var bouy = document.getElementsByClassName("bouy")[el.k];
 	var bouy_reflect = document.getElementsByClassName("bouy_reflect")[el.k];
@@ -922,28 +927,30 @@ function shipClickSet(el){
 	if (shtok.getElementsByClassName("shtok_up")[0] !== null) {
 		shtok.classList.remove("shtok_up");
 	}
-	clearInterval(shipWaveInterval);
-	ship.style.height="";
-	ship.style.width="";
-	el.top= ship.offsetTop;
-	ship.style.top="";
-	ship.style.left="";
-	ship.style.transform = "";
-	ship.style.mozTransform = "";
-	ship.style.webkitTransform = "";
-	ship.style.msTransform = "";
-	ship.style.oTransform = "";
-	ship.style.zIndex="";
-	ship.classList.add("ship_full");
-	flag.classList.add("flag_full");
-	shtok.classList.add("bouy_hide");
-	bouy.classList.add("bouy_hide");
-	bouy_reflect.classList.add("bouy_hide");
-	var close = document.getElementsByClassName("close")[0];
-	close.classList.remove("close_hidden");
-	close.addEventListener("click", shipCloseWindow);
-		el.activeElement = 1;
-		el.hoveredElement = 1;
+	//clearInterval(shipWaveInterval);
+	if (pos < 0) {
+		ship.style.height="";
+		ship.style.width="";
+		el.top= ship.offsetTop;
+		ship.style.top="";
+		ship.style.left="";
+		ship.style.transform = "";
+		ship.style.mozTransform = "";
+		ship.style.webkitTransform = "";
+		ship.style.msTransform = "";
+		ship.style.oTransform = "";
+		ship.style.zIndex="";
+		ship.classList.add("ship_full");
+		flag.classList.add("flag_full");
+		shtok.classList.add("bouy_hide");
+		bouy.classList.add("bouy_hide");
+		bouy_reflect.classList.add("bouy_hide");
+		var close = document.getElementsByClassName("close")[0];
+		close.classList.remove("close_hidden");
+		close.addEventListener("click", shipCloseWindow);
+			el.activeElement = 1;
+			el.hoveredElement = 1;
+	}
 }
 
 function shipCloseWindow(){
