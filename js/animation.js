@@ -834,24 +834,24 @@ function cloudClickSet(el){
 function replaceFlash(el) {
 	var lnk;
 	switch (el.k) {
-		case 0: lnk = "web/Banner_video/225804.mp4"; el.w = 742; el.h= 92; break;
-		case 1: lnk = "web/Banner_video/225821.mp4"; el.w = 995; el.h= 100; break;
-		case 2: lnk = "web/Banner_video/226718.mp4"; el.w = 728; el.h= 90; break;
-		case 3: lnk = "web/Banner_video/228217.mp4"; el.w = 250; el.h= 250; break;
-		case 4: lnk = "web/Banner_video/228344.mp4"; el.w = 700; el.h= 100; break;
-		case 5: lnk = "web/Banner_video/M4_800x90_Times_RU.mp4"; el.w = 800; el.h= 90; break;
-		case 6: lnk = "web/Banner_video/Maxima_divas_nedelas_995x95_lv.mp4"; el.w = 995; el.h= 95; break;
-		case 7: lnk = "web/Banner_video/Monald_Metals_728x90"; el.w = 728; el.h= 90; break;
-		case 8: lnk = "web/Banner_video/Multikino_750x100_august_LV.mp4"; el.w = 750; el.h= 100; break;
-		case 9: lnk = "web/Banner_video/NorvikBanka_20Y_750x180_LV5.mp4"; el.w = 750; el.h= 180; break;
-		case 10: lnk = "web/Banner_video/NorvikBanka_Depozit_NY2014_750x180_LV2.mp4"; el.w = 750; el.h= 180; break;
-		case 11: lnk = "web/Banner_video/NorvikBanka_NIPS_autumn_230x230_RU.mp4"; el.w = 230; el.h= 230; break;
-		case 12: lnk = "web/Banner_video/NorvikBanka_NIPS_birds_750x180_LV.mp4"; el.w =750; el.h= 180; break;
-		case 13: lnk = "web/Banner_video/NorvikBanka_MultiTrade_LV_750x180_NEW4.mp4"; el.w = 750; el.h= 180; break;
-		case 14: lnk = "web/Banner_video/NorvikBanka_Davina_davanas_750x180_RU2_2.mp4"; el.w = 750; el.h= 180; break;
-		case 15: lnk = "web/Banner_video/NorvikBanka_Depozit_Jubilej_750x180_LV3.mp4"; el.w = 750; el.h= 180; break;
-		case 16: lnk = "web/Banner_video/NorvikBanka_Depozit_Lieldena_750x180_LV.mp4"; el.w = 750; el.h= 180; break;
-		case 17: lnk = "web/Banner_video/NorvikTrade_electronic_trade_250x250_RU3.mp4"; el.w = 250; el.h= 250; break;
+		case 0: lnk = "web/banner_video/225804.mp4"; el.w = 742; el.h= 92; break;
+		case 1: lnk = "web/banner_video/225821.mp4"; el.w = 995; el.h= 100; break;
+		case 2: lnk = "web/banner_video/226718.mp4"; el.w = 728; el.h= 90; break;
+		case 3: lnk = "web/banner_video/228217.mp4"; el.w = 250; el.h= 250; break;
+		case 4: lnk = "web/banner_video/228344.mp4"; el.w = 700; el.h= 100; break;
+		case 5: lnk = "web/banner_video/M4_800x90_Times_RU.mp4"; el.w = 800; el.h= 90; break;
+		case 6: lnk = "web/banner_video/Maxima_divas_nedelas_995x95_lv.mp4"; el.w = 995; el.h= 95; break;
+		case 7: lnk = "web/banner_video/Monald_Metals_728x90"; el.w = 728; el.h= 90; break;
+		case 8: lnk = "web/banner_video/Multikino_750x100_august_LV.mp4"; el.w = 750; el.h= 100; break;
+		case 9: lnk = "web/banner_video/NorvikBanka_20Y_750x180_LV5.mp4"; el.w = 750; el.h= 180; break;
+		case 10: lnk = "web/banner_video/NorvikBanka_Depozit_NY2014_750x180_LV2.mp4"; el.w = 750; el.h= 180; break;
+		case 11: lnk = "web/banner_video/NorvikBanka_NIPS_autumn_230x230_RU.mp4"; el.w = 230; el.h= 230; break;
+		case 12: lnk = "web/banner_video/NorvikBanka_NIPS_birds_750x180_LV.mp4"; el.w =750; el.h= 180; break;
+		case 13: lnk = "web/banner_video/NorvikBanka_MultiTrade_LV_750x180_NEW4.mp4"; el.w = 750; el.h= 180; break;
+		case 14: lnk = "web/banner_video/NorvikBanka_Davina_davanas_750x180_RU2_2.mp4"; el.w = 750; el.h= 180; break;
+		case 15: lnk = "web/banner_video/NorvikBanka_Depozit_Jubilej_750x180_LV3.mp4"; el.w = 750; el.h= 180; break;
+		case 16: lnk = "web/banner_video/NorvikBanka_Depozit_Lieldena_750x180_LV.mp4"; el.w = 750; el.h= 180; break;
+		case 17: lnk = "web/banner_video/NorvikTrade_electronic_trade_250x250_RU3.mp4"; el.w = 250; el.h= 250; break;
 		
 	}
 	var player_field = document.getElementsByClassName("flash_field")[0];
