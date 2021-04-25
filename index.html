@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
 <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="module" src=" js/animation.js"></script> 
@@ -26,7 +27,7 @@ Loading...
 		<img id="clouds_heigh" class="clouds_heigh_down" src="images/cloud_heigh.png" alt="clouds_heigh">
 		<div class="intro_block">
 			<div class="slogan">
-			<p>Portfolio</p>
+			<p><i>Portfolio</i></p>
 			</div>
 			<div class="intro">
 			TERE! Mina olen Roman Kasterpalu. Töötan kujunduse valdkonnas juba üle 15 aasta. Selle aja jooksul olen kujundanud hulgaliselt kujundusi nii trüki, kui ka veebi jaoks. Oman kogemust videotöötluses ja ka 3D kujunduses.
@@ -59,7 +60,7 @@ Loading...
 		<img src="web/flash_clouds/228344.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/M4.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/Maxima.png" alt="flash slide" class="flash_cloud">
-		<img src="web/flash_clouds/Monald.png" alt="flash slide" class="flash_cloud">
+		<img src="web/flash_clouds/NorvikPensija.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/Multikino.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/Norvik20.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/Norvik2014.png" alt="flash slide" class="flash_cloud">
@@ -70,9 +71,17 @@ Loading...
 		<img src="web/flash_clouds/NorvikJubilej.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/NorvikLieldiena.png" alt="flash slide" class="flash_cloud">
 		<img src="web/flash_clouds/NorvikTrade.png" alt="flash slide" class="flash_cloud">
+		<img src="web/flash_clouds/Multikino50.png" alt="flash slide" class="flash_cloud">
+		<!--<img src="web/flash_clouds/Monald.png" alt="flash slide" class="flash_cloud">-->
+		<img src="web/flash_clouds/Balva.png" alt="flash slide" class="flash_cloud">
+		<img src="web/flash_clouds/Ot.png" alt="flash slide" class="flash_cloud">
 		<div class="flash_field flash_away">
-		<embed id="flash_player" height="90" src="" quality="high"  
-			type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"> 
+		<!-- <embed id="flash_player" height="90" src="" quality="high"  
+			type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"> -->
+		<video id="flash_player" height="90" autoplay controls>
+		  <source src="" type="video/mp4">
+		Your browser does not support the video tag.
+		</video>
 		</div>
 	</div>
 	<div id="sea" class="hide">
@@ -86,8 +95,34 @@ Loading...
 		</div>
 		<div class="sea_water">
 		<div class="ship">
+			<div class="flag">
+			<a href="http://actual.ee/" target="_blank"><img src="web/sites/actual.jpg" alt="web slide"></a>
+			</div>
+			<div class="shtok">
+			</div>
+			<div class="bouy">
+			<img class="bouy_pic" src="images/boy.png" alt="bouy">
+			</div>
+			<div class="bouy_reflect">
+			<img src="images/boy_reflect.png" alt="bouy_reflection">
+			</div>
+		</div>
+		<div class="ship">
+			<div class="flag">
+			<img src="web/sites/autvar.jpg" alt="web slide">
+			</div>
+			<div class="shtok">
+			</div>
+			<div class="bouy">
+			<img class="bouy_pic" src="images/boy.png" alt="bouy">
+			</div>
+			<div class="bouy_reflect">
+			<img src="images/boy_reflect.png" alt="bouy_reflection">
+			</div>
+		</div>
+		<div class="ship">
 		<div class="flag">
-		<a href="http://autvar.ee/" target="_blank"><img src="web/sites/autvar.jpg" alt="web slide"></a>
+		<img src="web/sites/brevel.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -100,20 +135,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://brevell.1182.ee/" target="_blank"><img src="web/sites/brevel.jpg" alt="web slide"></a>
-		</div>
-		<div class="shtok">
-		</div>
-		<div class="bouy">
-		<img class="bouy_pic" src="images/boy.png" alt="bouy">
-		</div>
-		<div class="bouy_reflect">
-		<img src="images/boy_reflect.png" alt="bouy_reflection">
-		</div>
-		</div>
-		<div class="ship">
-		<div class="flag">
-		<a href="http://elektrijuht.1182.ee/" target="_blank"><img src="web/sites/elektrijuht.jpg" alt="web slide"></a>
+		<img src="web/sites/elektrijuht.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -204,7 +226,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://laaneteed.1182.ee/" target="_blank"><img src="web/sites/laaneteed.jpg" alt="web slide"></a>
+		<a href="http://lääneteed.ee/" target="_blank"><img src="web/sites/laaneteed.jpg" alt="web slide"></a>
 		</div>
 		<div class="shtok">
 		</div>
@@ -217,7 +239,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://lrf.1182.ee/" target="_blank"><img src="web/sites/lrf.jpg" alt="web slide"></a>
+		<img src="web/sites/lrf.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -256,7 +278,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://mustlaperearstikeskus.1182.ee/" target="_blank"><img src="web/sites/mustlaperearstikeskus.jpg" alt="web slide"></a>
+		<img src="web/sites/mustlaperearstikeskus.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -269,7 +291,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://naimakasitoo.1182.ee/" target="_blank"><img src="web/sites/naimakasitoo.jpg" alt="web slide"></a>
+		<img src="web/sites/naimakasitoo.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -295,7 +317,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://praksis.1182.ee/" target="_blank"><img src="web/sites/praksis.jpg" alt="web slide"></a>
+		<img src="web/sites/praksis.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -308,7 +330,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://puuaken.1182.ee/" target="_blank"><img src="web/sites/puuaken.jpg" alt="web slide"></a>
+		<img src="web/sites/puuaken.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
@@ -334,7 +356,7 @@ Loading...
 		</div>
 		<div class="ship">
 		<div class="flag">
-		<a href="http://tapnekasi.ee/" target="_blank"><img src="web/sites/tapnekasi.jpg" alt="web slide"></a>
+		<img src="web/sites/tapnekasi.jpg" alt="web slide">
 		</div>
 		<div class="shtok">
 		</div>
